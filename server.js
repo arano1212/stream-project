@@ -6,6 +6,7 @@ import authRoutes from './routes/authRoutes.js'
 // import updateIsActive from './updateIsActive.js'
 import cors from 'cors'
 import morgan from 'morgan'
+import userRoutes from './routes/userRoutes.js'
 
 const PORT = process.env.PORT || 3000
 
@@ -20,6 +21,7 @@ api.use(morgan('tiny'))
 
 api.use('/api/v1/', authRoutes)
 api.use('/api/v1/movies', movieRoutes)
+api.use('/api/v1/users', userRoutes)
 
 api.listen(PORT, () => {
   console.log(`server is running en ${PORT}🚀`)
