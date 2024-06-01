@@ -4,6 +4,8 @@ import { connect } from './config/database.js'
 import movieRoutes from './routes/movieRoutes.js'
 import authRoutes from './routes/authRoutes.js'
 // import updateIsActive from './updateIsActive.js'
+import cors from 'cors'
+import morgan from 'morgan'
 
 const PORT = process.env.PORT || 3000
 
@@ -13,6 +15,8 @@ connect()
 
 const api = express()
 api.use(express.json())
+api.use(cors())
+api.use(morgan('tiny'))
 
 api.use('/api/v1/', authRoutes)
 api.use('/api/v1/movies', movieRoutes)

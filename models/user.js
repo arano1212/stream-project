@@ -1,5 +1,7 @@
 import mongoose from 'mongoose'
 
+const roleEnum = ['basic', 'admin']
+
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -18,6 +20,12 @@ const userSchema = new mongoose.Schema({
   },
   username: { type: String, unique: true, required: true },
   avatar: { type: String },
+  role: {
+    type: String,
+    default: 'basic',
+    enum: roleEnum,
+    required: true
+  },
   isActive: {
     type: Boolean,
     default: true
