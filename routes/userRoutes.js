@@ -1,8 +1,11 @@
 import express from 'express'
-import { getAllUser } from '../controllers/userController.js'
+import { deleteUserById, getAllUser, getUserById, updateUserById } from '../controllers/userController.js'
 
 const userRoutes = express.Router()
 
 userRoutes.get('/', getAllUser)
+userRoutes.get('/:userId', getUserById)
+userRoutes.patch('/:userId', updateUserById)
+userRoutes.delete('/:userId', deleteUserById)
 
 export default userRoutes
