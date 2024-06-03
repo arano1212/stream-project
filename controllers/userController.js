@@ -69,9 +69,32 @@ const deleteUserById = async (req, res) => {
   }
 }
 
+const getUserQuery = async (req, res) => {
+  const querysDB = { isActive: true }
+
+  const queryKeys = ['email', 'username']
+
+  queryKeys.forEach(key => {
+    if (req.query[key]) {
+      querysDB[key] = { $regex: new RegExp(req.query[key], 'i') }
+    }
+  })
+
+  try {
+    const users = await User.find(querysDB)
+    if (!users || users.length === 0) {
+      return res.status(404).json({ msg: 'users not found' })
+    }
+    res.status(200).json(users)
+  } catch (error) {
+    res.status(400).json({ msg: error.message })
+  }
+}
+
 export {
   getAllUser,
   getUserById,
   updateUserById,
-  deleteUserById
+  deleteUserById,
+  getUserQuery
 }
