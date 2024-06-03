@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
-import Movie from './models/movies.js'
+import Movie from '../models/movies.js'
 
 dotenv.config()
 
