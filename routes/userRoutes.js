@@ -6,7 +6,7 @@ const userRoutes = express.Router()
 userRoutes.get('/', getAllUser)
 userRoutes.get('/search', getUserQuery)
 userRoutes.get('/:userId', getUserById)
-userRoutes.patch('/:userId', upload.single('avatar') , updateUserById)
+userRoutes.patch('/:userId', upload.single('avatar'), updateUserById)
 userRoutes.delete('/:userId', deleteUserById)
 
 export default userRoutes
