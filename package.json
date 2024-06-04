@@ -10,7 +10,8 @@
     "dev": "nodemon server.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "populate": "node populateUser.js"
+    "populate": "node populateUser.js",
+    "populateMovie": "node populateMovie.js"
   },
   "keywords": [],
   "author": "",
