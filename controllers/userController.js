@@ -1,4 +1,22 @@
 import User from '../models/user.js'
+import multer from 'multer'
+import { tmpdir } from 'os'
+import { v2 as cloudinary } from 'cloudinary'
+
+const storage = multer.diskStorage({
+  destination: tmpdir(),
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+
+const upload = multer({ storage })
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY2,
+  api_secret: process.env.API_SECRET
+})
 
 const getAllUser = async (req, res) => {
   try {
@@ -30,7 +48,13 @@ const updateUserById = async (req, res) => {
   }
 
   try {
-    const user = await User.findByIdAndUpdate(req.params.userId, req.body, { new: true })
+    const updateData = { ...req.body }
+
+    if (req.file) {
+      const result = await cloudinary.uploader.upload(req.file.path)
+      updateData.avatar = result.secure_url
+    }
+    const user = await User.findByIdAndUpdate(req.params.userId, updateData, { new: true })
     if (!user) {
       return res.status(404).json({ msg: 'user not found' })
     }
@@ -96,5 +120,6 @@ export {
   getUserById,
   updateUserById,
   deleteUserById,
-  getUserQuery
+  getUserQuery,
+  upload
 }
