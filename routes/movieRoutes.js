@@ -1,5 +1,5 @@
 import express from 'express'
-import { createMovie, deleteFilmById, getAllMovie, getMovieById, getMovieQuery, updateMovieById, getMovieIdVotes} from '../controllers/movieController.js'
+import { createMovie, deleteFilmById, getAllMovie, getMovieById, getMovieQuery, updateMovieById, getMovieIdVotes } from '../controllers/movieController.js'
 import { isAuth } from '../middlewares/isAuth.js'
 import { isAdmin } from '../middlewares/isAdmin.js'
 
