@@ -110,11 +110,26 @@ const getMovieQuery = async (req, res) => {
   }
 }
 
+const getMovieIdVotes = async (req, res) => {
+  try {
+    const movieId = req.params.movieId
+    const movie = await Movie.findById(movieId).select('vote_count')
+    if (!movie) {
+      return res.status(404).json({ error: 'Movie not found' })
+    }
+    res.status(200).json({ movieId: movie._id, vote_count: movie.vote_count })
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
 export {
   createMovie,
   getAllMovie,
   getMovieById,
   updateMovieById,
   deleteFilmById,
-  getMovieQuery
+  getMovieQuery,
+  getMovieIdVotes
+
 }
